@@ -31,6 +31,12 @@ module.exports = {
         tightest: "-.01em",
         tighter: "-.03em",
       },
+      borderRadius: {
+        "4xl": "48px",
+      },
+      boxShadow: {
+        nav: "inset 0px -2px 1px rgba(0, 0, 0, 0.05), inset 0px 1px 1px",
+      },
     },
   },
   plugins: [],

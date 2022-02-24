@@ -17,3 +17,7 @@
 .login-text {
   @apply text-tiny text-sm leading-6 tracking-tightest;
 }
+
+.hover-sidebar {
+  @apply hover:bg-neutral-300 hover:cursor-pointer hover:shadow-nav hover:shadow-white rounded-xl;
+}
