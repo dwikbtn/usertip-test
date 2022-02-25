@@ -6,7 +6,7 @@ import mBall from "../../assets/icons/masterball.svg";
 import walletIc from "../../assets/icons/wallet.svg";
 import avatar from "../../assets/icons/avatar.png";
 
-const Topbar = () => {
+const Topbar = ({ userInfo }) => {
   return (
     <nav className="h-24 top-0 right-0 left-0 -z-10 fixed bg-neutral-100">
       <ul className="py-9 pr-10 flex justify-end items-center">
@@ -17,7 +17,7 @@ const Topbar = () => {
             className="w-5 mr-[6px] inline"
           />
           <span className="font-bold text-tiny text-neutral-400 tracking-tightest">
-            5
+            {userInfo.pokeB}
           </span>
         </li>
         <li className="mr-10">
@@ -27,7 +27,7 @@ const Topbar = () => {
             className="w-5 mr-[6px] inline"
           />
           <span className="font-bold text-tiny text-neutral-400 tracking-tightest">
-            5
+            {userInfo.greatB}
           </span>
         </li>
         <li className="mr-10 ">
@@ -37,7 +37,7 @@ const Topbar = () => {
             className="w-5 mr-[6px] inline"
           />
           <span className="font-bold text-tiny text-neutral-400 tracking-tightest">
-            0
+            {userInfo.masterB}
           </span>
         </li>
         <li className="mr-10 ">
@@ -47,7 +47,7 @@ const Topbar = () => {
             className="w-5 mr-[6px] inline"
           />
           <span className="font-bold text-tiny text-neutral-400 tracking-tightest">
-            500
+            {userInfo.coins}
           </span>
         </li>
         <li>

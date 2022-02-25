@@ -1,7 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import logoImg from "../../assets/icons/Logo.png";
 
 const SignUp = (props) => {
+  const [userName, setUserName] = useState();
+  const [password, setPassword] = useState();
+  const [rePassword, setRePassword] = useState();
+  const [email, setEmail] = useState();
+
+  const signUpHandler = (e) => {
+    e.preventDefault();
+    if (password === rePassword && userName && password && email) {
+      props.signUpHandler(email, userName, password);
+      props.logStatus();
+    } else {
+      console.log("Make sure to fill all the form");
+    }
+  };
+
   return (
     <div className="flex w-screen h-screen ">
       <form className="mx-auto my-[143px] flex justify-start flex-col w-95  ">
@@ -18,6 +33,7 @@ const SignUp = (props) => {
           Username
         </label>
         <input
+          onChange={(e) => setUserName(e.target.value)}
           type="text"
           name="userName"
           className="bg-neutral-200 h-12 rounded-xl p-3 login-text font-semibold text-gray-200 mb-3"
@@ -29,6 +45,7 @@ const SignUp = (props) => {
           Email
         </label>
         <input
+          onChange={(e) => setEmail(e.target.value)}
           type="email"
           name="email"
           className="bg-neutral-200 h-12 rounded-xl p-3 login-text font-semibold text-gray-200 mb-3"
@@ -40,6 +57,7 @@ const SignUp = (props) => {
           Password
         </label>
         <input
+          onChange={(e) => setPassword(e.target.value)}
           type="password"
           name="password"
           className="bg-neutral-200 h-12 rounded-xl p-3 login-text font-semibold text-gray-200 mb-3"
@@ -51,12 +69,13 @@ const SignUp = (props) => {
           Repeat Password
         </label>
         <input
+          onChange={(e) => setRePassword(e.target.value)}
           type="password"
           name="repassword"
           className="bg-neutral-200 h-12 rounded-xl p-3 login-text font-semibold text-gray-200 mb-3"
         />
         <button
-          type="submit"
+          onClick={signUpHandler}
           className="bg-primary rounded-xl h-12 text-neutral-100 p-3 login-text font-bold mb-8 "
         >
           Sign Up

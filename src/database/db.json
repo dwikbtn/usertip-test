@@ -1,0 +1,12 @@
+{
+  "userName": "John",
+  "emailAddress": "test@email.com",
+  "password": "test",
+  "coins": 500,
+  "attempts": 0,
+  "catched": 0,
+  "pokeB": 0,
+  "greatB": 0,
+  "masterB": 0,
+  "pokemonList": []
+}

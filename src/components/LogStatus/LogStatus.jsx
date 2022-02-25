@@ -11,9 +11,14 @@ const LogStatus = (props) => {
     });
   };
   return status ? (
-    <Login status={statusHandler} logStatus={props.logStatus} />
+    <Login status={statusHandler} logStatus={props.logStatus} db={props.db} />
   ) : (
-    <SignUp status={statusHandler} />
+    <SignUp
+      status={statusHandler}
+      logStatus={props.logStatus}
+      db={props.db}
+      signUpHandler={props.signUpHandler}
+    />
   );
 };
 

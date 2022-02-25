@@ -1,7 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import logoImg from "../../assets/icons/Logo.png";
 
 const Login = (props) => {
+  const [userName, setUserName] = useState();
+  const [password, setPassword] = useState();
+
+  const loginHandler = (e) => {
+    e.preventDefault();
+    if (userName === props.db.userName && password === props.db.password) {
+      props.logStatus();
+    } else {
+      console.log("password incorrect");
+    }
+  };
+
   return (
     <div className="flex w-screen h-screen ">
       <form className="m-auto flex justify-start flex-col w-95  ">
@@ -15,6 +27,7 @@ const Login = (props) => {
           Username
         </label>
         <input
+          onChange={(e) => setUserName(e.target.value)}
           type="text"
           name="userName"
           className="bg-neutral-200 h-12 rounded-xl p-3 login-text font-semibold text-gray-200 mb-3"
@@ -26,14 +39,14 @@ const Login = (props) => {
           Password
         </label>
         <input
+          onChange={(e) => setPassword(e.target.value)}
           type="password"
           name="password"
           className="bg-neutral-200 h-12 rounded-xl p-3 login-text font-semibold text-gray-200 mb-3"
         />
         <button
-          type="submit"
           className="bg-primary rounded-xl h-12 text-neutral-100 p-3 login-text font-bold mb-8  hover:cursor-pointer hover:underline"
-          onClick={() => props.logStatus()}
+          onClick={loginHandler}
         >
           Sign in
         </button>
