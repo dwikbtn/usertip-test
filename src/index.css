@@ -21,3 +21,37 @@
 .hover-sidebar {
   @apply hover:bg-neutral-300 hover:cursor-pointer hover:shadow-nav hover:shadow-white rounded-xl;
 }
+.hover-link {
+  @apply hover:cursor-pointer hover:underline;
+}
+.header {
+  @apply font-semibold text-4xl tracking-["-0.02em"];
+}
+
+.prodOverview {
+  @apply bg-neutral-100 rounded-[20px];
+}
+
+.text {
+  @apply font-semibold text-xl leading-8 tracking-["-0.02em"];
+}
+
+.home-card {
+  @apply w-72 h-48 rounded-xl;
+}
+
+.subText {
+  @apply font-semibold text-[13px] leading-4 tracking-tightest;
+}
+
+.count {
+  @apply font-semibold text-5xl leading-12 tracking-tighter text-neutral-700;
+}
+
+.catch-border {
+  @apply p-4 w-80  border-2 border-neutral-300 rounded-xl  flex items-center active:border-primary disabled:bg-neutral-200 disabled:text-neutral-400;
+}
+
+.catch-button {
+  @apply w-80 py-3 px-5 bg-primary text-white rounded-xl;
+}

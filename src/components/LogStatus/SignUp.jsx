@@ -1,7 +1,7 @@
 import React from "react";
 import logoImg from "../../assets/icons/Logo.png";
 
-const Logout = () => {
+const SignUp = (props) => {
   return (
     <div className="flex w-screen h-screen ">
       <form className="mx-auto my-[143px] flex justify-start flex-col w-95  ">
@@ -62,11 +62,17 @@ const Logout = () => {
           Sign Up
         </button>
         <p className="login-text font-semibold text-neutral-400 ">
-          Have an account? <span className="text-black">Login.</span>
+          Have an account?
+          <span
+            className="text-black hover:cursor-pointer hover:underline"
+            onClick={() => props.status()}
+          >
+            Login.
+          </span>
         </p>
       </form>
     </div>
   );
 };
 
-export default Logout;
+export default SignUp;

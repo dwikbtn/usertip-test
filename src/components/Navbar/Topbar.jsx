@@ -1,14 +1,14 @@
 import React from "react";
 
-import pBall from "../../../assets/icons/pokeball.svg";
-import gBall from "../../../assets/icons/greatball.svg";
-import mBall from "../../../assets/icons/masterball.svg";
-import walletIc from "../../../assets/icons/wallet.svg";
-import avatar from "../../../assets/icons/avatar.png";
+import pBall from "../../assets/icons/pokeball.svg";
+import gBall from "../../assets/icons/greatball.svg";
+import mBall from "../../assets/icons/masterball.svg";
+import walletIc from "../../assets/icons/wallet.svg";
+import avatar from "../../assets/icons/avatar.png";
 
 const Topbar = () => {
   return (
-    <nav className="h-24 text-neutral-100">
+    <nav className="h-24 top-0 right-0 left-0 -z-10 fixed bg-neutral-100">
       <ul className="py-9 pr-10 flex justify-end items-center">
         <li className="mr-10">
           <img
