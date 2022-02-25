@@ -34,6 +34,7 @@ function App() {
   const navbarHandler = (position) => {
     setCurrrentView(position);
   };
+
   return (
     <>
       {!logStatus ? (
@@ -48,8 +49,8 @@ function App() {
           <div className="flex">
             <SideBar navbarHandler={navbarHandler} />
             <div className="mt-24 w-full -z-20 h-screen bg-neutral-200">
-              {currentView == "home" && <Home />}
-              {currentView == "catch" && <Catch />}
+              {currentView == "home" && <Home userInfo={userInfo} />}
+              {currentView == "catch" && <Catch userInfo={userInfo} />}
             </div>
           </div>
         </>

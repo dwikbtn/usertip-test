@@ -16,7 +16,7 @@ const SideBar = ({ navbarHandler }) => {
       <ul className="self-start mb-auto w-full">
         <li
           className="flex items-center h-12 p-3 group hover-sidebar "
-          onClick={(e) => navbarHandler("home")}
+          onClick={() => navbarHandler("home")}
         >
           <img src={homeIc} alt="home nav" className="w-6 h-6 inline mr-3  " />
           <span className="font-semibold text-tiny leading-6 tracking-tightest text-neutral-400 group-hover:text-neutral-700">
@@ -25,7 +25,7 @@ const SideBar = ({ navbarHandler }) => {
         </li>
         <li
           className="flex items-center h-12 p-3 group hover-sidebar "
-          onClick={(e) => navbarHandler("catch")}
+          onClick={() => navbarHandler("catch")}
         >
           <img src={catchIc} alt="home nav" className="w-6 h-6 inline mr-3" />
           <span className="font-semibold text-tiny leading-6 tracking-tightest text-neutral-400 group-hover:text-neutral-700">

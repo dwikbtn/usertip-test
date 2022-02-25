@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import pBall from "../../assets/icons/pokeball.svg";
 import gBall from "../../assets/icons/greatball.svg";
@@ -8,7 +8,24 @@ import looking from "../../assets/icons/looking.svg";
 import pokeball from "../../assets/icons/pokeball.png";
 import placeholderImg from "../../assets/icons/placeholder-1.png";
 
-const Catch = () => {
+const Catch = ({ userInfo }) => {
+  const [findPokemon, setFind] = useState(false);
+  const [viewState, setViewState] = useState("pickPokeBallView");
+  const [currentPokemon, setPokemon] = useState();
+
+  useEffect(() => {
+    let randomNumber = Math.floor(Math.random() * (898 - 1 + 1)) + 1;
+
+    fetch(`https://pokeapi.co/api/v2/pokemon/${randomNumber}`)
+      .then((response) => response.json())
+      .then((data) => setPokemon(data));
+  }, [findPokemon]);
+
+  const findPokemonHandler = () => {
+    setFind(!findPokemon);
+    console.log(currentPokemon);
+  };
+
   const pickPokeBallView = (
     <div className="flex mt-8 justify-between">
       <div>
@@ -16,7 +33,9 @@ const Catch = () => {
         <div className="catch-border mb-1">
           <img src={pBall} alt="" className="w-5 h-5 mr-3" />
           <div className="text-left">
-            <p className="font-medium text-xs text-neutral-400">5 left</p>
+            <p className="font-medium text-xs text-neutral-400">
+              {userInfo.pokeB} left
+            </p>
             <p className="font-semibold text-base text-neutral-700">
               Poke Ball
             </p>
@@ -25,7 +44,9 @@ const Catch = () => {
         <div className="catch-border mb-1">
           <img src={gBall} alt="" className="w-5 h-5 mr-3" />
           <div className="text-left">
-            <p className="font-medium text-xs text-neutral-400">5 left</p>
+            <p className="font-medium text-xs text-neutral-400">
+              {userInfo.greatB} left
+            </p>
             <p className="font-semibold text-base text-neutral-700">
               great Ball
             </p>
@@ -34,13 +55,17 @@ const Catch = () => {
         <div className="catch-border">
           <img src={mBall} alt="" className="w-5 h-5 mr-3" />
           <div className="text-left">
-            <p className="font-medium text-xs text-neutral-400">5 left</p>
+            <p className="font-medium text-xs text-neutral-400">
+              {userInfo.masterB} left
+            </p>
             <p className="font-semibold text-base text-neutral-700">
               Master Ball
             </p>
           </div>
         </div>
-        <button className="catch-button mt-6">Catch A Pokemon</button>
+        <button onClick={findPokemonHandler} className="catch-button mt-6">
+          Catch A Pokemon
+        </button>
       </div>
       <div className="w-1/2 h-full overflow-hidden rounded-[20px]">
         <img src={pokeball} alt="" className="w-full" />
@@ -91,9 +116,9 @@ const Catch = () => {
         It’s a wild west out there. Good luck, Pokemon Trainer
         IWannaBeTheVeryBest.
       </p>
-      {/* {catchPkm} */}
-      {/* lookPkmView */}
-      {catchResultView}
+      {viewState == "pickPokeBallView" && pickPokeBallView}
+      {/* {lookPkmView}
+      {catchResultView} */}
     </div>
   );
 };
