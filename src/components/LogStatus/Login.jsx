@@ -4,7 +4,12 @@ import Input from "../UI/Input";
 
 const Login = (props) => {
   const [inputValue, setInputValue] = useState({ userName: "", password: "" });
+  const [errorMsg, setErrorMsg] = useState({
+    userValidation: false,
+    passValidation: false,
+  });
   const { userName, password } = inputValue;
+  // const { userValidation, passValidation } = errorMsg;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -14,17 +19,23 @@ const Login = (props) => {
     }));
   };
 
+  const error = {
+    userName: "user name is invalid",
+    password: "password is invalid",
+  };
+
   const loginHandler = (e) => {
     e.preventDefault();
     const userData = props.db.find((user) => user.userName === userName);
     if (!userData) {
-      console.log("user name invalid");
+      setErrorMsg((prev) => ({ ...prev, userValidation: true }));
       return 0;
     }
     if (userName === userData.userName && password === userData.password) {
+      setErrorMsg();
       props.logStatus();
     } else {
-      console.log("password incorrect");
+      setErrorMsg((prev) => ({ ...prev, passValidation: true }));
     }
   };
 
@@ -41,6 +52,8 @@ const Login = (props) => {
           className={"mb-3"}
           onChange={handleInputChange}
           value={userName}
+          valid={errorMsg.userValidation}
+          errorMsg={error.userName}
         />
         <Input
           label={"password"}
@@ -49,6 +62,8 @@ const Login = (props) => {
           className={"mb-3"}
           onChange={handleInputChange}
           value={password}
+          valid={errorMsg.passValidation}
+          errorMsg={error.password}
         />
         <button
           className="bg-primary rounded-xl h-12 text-neutral-100 p-3 login-text font-bold mb-8  hover:cursor-pointer hover:underline"
