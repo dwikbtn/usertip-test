@@ -10,12 +10,17 @@
   }
 }
 
+/* ui */
+.input-form {
+  @apply block bg-neutral-200 h-12 rounded-xl p-3 login-text font-semibold text-gray-200;
+}
+
 .login-header {
   @apply font-semibold text-5xl leading-12 tracking-tighter text-neutral-700 mb-8;
 }
 
 .login-text {
-  @apply text-tiny text-sm leading-6 tracking-tightest;
+  @apply text-tiny leading-6 tracking-tightest;
 }
 
 .hover-sidebar {

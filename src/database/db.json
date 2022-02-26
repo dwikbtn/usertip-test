@@ -1,12 +1,26 @@
-{
-  "userName": "John",
-  "emailAddress": "test@email.com",
-  "password": "test",
-  "coins": 500,
-  "attempts": 0,
-  "catched": 0,
-  "pokeB": 5,
-  "greatB": 2,
-  "masterB": 1,
-  "pokemonList": []
-}
+[
+  {
+    "userName": "John",
+    "emailAddress": "test@email.com",
+    "password": "test",
+    "coins": 500,
+    "attempts": 0,
+    "catched": 0,
+    "pokeB": 5,
+    "greatB": 2,
+    "masterB": 1,
+    "pokemonList": []
+  },
+  {
+    "userName": "test2",
+    "emailAddress": "test@email.com",
+    "password": "test2",
+    "coins": 500,
+    "attempts": 0,
+    "catched": 0,
+    "pokeB": 5,
+    "greatB": 2,
+    "masterB": 1,
+    "pokemonList": []
+  }
+]
