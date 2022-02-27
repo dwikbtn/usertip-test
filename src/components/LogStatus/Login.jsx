@@ -9,7 +9,6 @@ const Login = (props) => {
     passValidation: false,
   });
   const { userName, password } = inputValue;
-  // const { userValidation, passValidation } = errorMsg;
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
