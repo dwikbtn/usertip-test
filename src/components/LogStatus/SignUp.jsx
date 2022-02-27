@@ -1,15 +1,63 @@
 import React, { useState } from "react";
 import logoImg from "../../assets/icons/Logo.png";
+import Input from "../UI/Input";
+
+import validator from "validator";
 
 const SignUp = (props) => {
-  const [userName, setUserName] = useState();
-  const [password, setPassword] = useState();
-  const [rePassword, setRePassword] = useState();
-  const [email, setEmail] = useState();
+  const [inputValue, setInputValue] = useState({
+    userName: "",
+    password: "",
+    email: "",
+    repassword: "",
+  });
+  const [errorMsg, setErrorMsg] = useState({
+    userValidation: false,
+    passValidation: false,
+    rePassValidation: false,
+    emailValidation: false,
+  });
+  const { userName, password, email, repassword } = inputValue;
+
+  // error message
+
+  const error = {
+    userName: "user name must more then 6 characters",
+    email: "please input valid email",
+    password: "Your Password is invalid, make sure it more then 6 Characters",
+    repassword: "Your password doesn't match",
+  };
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    console.log(name);
+    setInputValue((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleOnBlurChange = (e) => {
+    const { name } = e.target;
+
+    if (name === "userName") {
+      checkUserName();
+    }
+    if (name === "email") {
+      checkEmail();
+    }
+    if (name === "password") {
+      checkPassword();
+    }
+    if (name === "repassword") {
+      checkRepassword();
+    }
+  };
 
   const signUpHandler = (e) => {
     e.preventDefault();
-    if (password === rePassword && userName && password && email) {
+    const { userValidation, emailValidation, passValidation } = errorMsg;
+    if ((!userValidation, !emailValidation, !passValidation)) {
       props.signUpHandler(email, userName, password);
       props.logStatus();
     } else {
@@ -17,62 +65,84 @@ const SignUp = (props) => {
     }
   };
 
+  // validating input
+  const checkUserName = () => {
+    if (userName.length < 5) {
+      setErrorMsg((prev) => ({ ...prev, userValidation: true }));
+    } else setErrorMsg((prev) => ({ ...prev, userValidation: false }));
+  };
+  const checkEmail = () => {
+    if (!validator.isEmail(email)) {
+      setErrorMsg((prev) => ({ ...prev, emailValidation: true }));
+    } else setErrorMsg((prev) => ({ ...prev, emailValidation: false }));
+  };
+
+  const checkPassword = () => {
+    if (password.length < 6) {
+      setErrorMsg((prev) => ({ ...prev, passValidation: true }));
+    } else setErrorMsg((prev) => ({ ...prev, passValidation: false }));
+  };
+
+  const checkRepassword = () => {
+    if (repassword !== password) {
+      setErrorMsg((prev) => ({ ...prev, rePassValidation: true }));
+    } else setErrorMsg((prev) => ({ ...prev, rePassValidation: false }));
+  };
+
+  console.log(errorMsg);
+
   return (
     <div className="flex w-screen h-screen ">
-      <form className="mx-auto my-[143px] flex justify-start flex-col w-95  ">
+      <form className="mx-auto my-5 flex justify-start flex-col w-95  ">
         <img className="w-12 h-12 mb-8" src={logoImg} alt="logo" />
         <h2 className="login-header">Sign Up</h2>
         <p className="login-text font-semibold text-black mb-6">
           Start your journey today to become the best Pokemon Trainer ever lived
         </p>
         <div className="w-full bg-neutral-300 h-[2px] rounded-sm mb-8"></div>
-        <label
-          htmlFor="userName"
-          className="h-6 login-text  text-black font-semibold mb-3"
-        >
-          Username
-        </label>
-        <input
-          onChange={(e) => setUserName(e.target.value)}
-          type="text"
-          name="userName"
-          className="bg-neutral-200 h-12 rounded-xl p-3 login-text font-semibold text-gray-200 mb-3"
+        <Input
+          label={"User Name"}
+          onChange={handleInputChange}
+          value={userName}
+          type={"text"}
+          inputName={"userName"}
+          className={"mb-3"}
+          onBlur={handleOnBlurChange}
+          valid={errorMsg.userValidation}
+          errorMsg={error.userName}
         />
-        <label
-          htmlFor="email"
-          className="h-6 login-text  text-black font-semibold mb-3"
-        >
-          Email
-        </label>
-        <input
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          name="email"
-          className="bg-neutral-200 h-12 rounded-xl p-3 login-text font-semibold text-gray-200 mb-3"
+        <Input
+          label={"Email"}
+          onChange={handleInputChange}
+          value={email}
+          type={"email"}
+          inputName={"email"}
+          className={"mb-3"}
+          onBlur={handleOnBlurChange}
+          valid={errorMsg.emailValidation}
+          errorMsg={error.email}
         />
-        <label
-          htmlFor="password"
-          className="h-6 login-text font-semibold  text-black mb-3"
-        >
-          Password
-        </label>
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          name="password"
-          className="bg-neutral-200 h-12 rounded-xl p-3 login-text font-semibold text-gray-200 mb-3"
+        <Input
+          label={"Password"}
+          onChange={handleInputChange}
+          value={password}
+          type={"password"}
+          inputName={"password"}
+          className={"mb-3"}
+          onBlur={handleOnBlurChange}
+          valid={errorMsg.passValidation}
+          errorMsg={error.password}
         />
-        <label
-          htmlFor="repassword"
-          className="h-6 login-text font-semibold  text-black mb-3"
-        >
-          Repeat Password
-        </label>
-        <input
-          onChange={(e) => setRePassword(e.target.value)}
-          type="password"
-          name="repassword"
-          className="bg-neutral-200 h-12 rounded-xl p-3 login-text font-semibold text-gray-200 mb-3"
+        <Input
+          label={"Repeat Password"}
+          onChange={handleInputChange}
+          value={repassword}
+          type={"password"}
+          inputName={"repassword"}
+          className={"mb-3"}
+          onBlur={handleOnBlurChange}
+          valid={errorMsg.rePassValidation}
+          errorMsg={error.repassword}
         />
         <button
           onClick={signUpHandler}
