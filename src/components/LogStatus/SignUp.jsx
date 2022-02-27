@@ -22,7 +22,7 @@ const SignUp = (props) => {
   // error message
 
   const error = {
-    userName: "user invalid",
+    userName: "user name must more then 6 characters",
     email: "please input valid email",
     password: "Your Password is invalid, make sure it more then 6 Characters",
     repassword: "Your password doesn't match",
@@ -40,28 +40,37 @@ const SignUp = (props) => {
   const handleOnBlurChange = (e) => {
     const { name } = e.target;
 
+    if (name === "userName") {
+      checkUserName();
+    }
     if (name === "email") {
       checkEmail();
     }
     if (name === "password") {
       checkPassword();
     }
-    if (name === "password") {
+    if (name === "repassword") {
       checkRepassword();
     }
   };
 
   const signUpHandler = (e) => {
-    // e.preventDefault();
-    // if (password === rePassword && userName && password && email) {
-    //   props.signUpHandler(email, userName, password);
-    //   props.logStatus();
-    // } else {
-    //   console.log("Make sure to fill all the form");
-    // }
+    e.preventDefault();
+    const { userValidation, emailValidation, passValidation } = errorMsg;
+    if ((!userValidation, !emailValidation, !passValidation)) {
+      props.signUpHandler(email, userName, password);
+      props.logStatus();
+    } else {
+      console.log("Make sure to fill all the form");
+    }
   };
 
   // validating input
+  const checkUserName = () => {
+    if (userName.length < 5) {
+      setErrorMsg((prev) => ({ ...prev, userValidation: true }));
+    } else setErrorMsg((prev) => ({ ...prev, userValidation: false }));
+  };
   const checkEmail = () => {
     if (!validator.isEmail(email)) {
       setErrorMsg((prev) => ({ ...prev, emailValidation: true }));
@@ -98,6 +107,9 @@ const SignUp = (props) => {
           type={"text"}
           inputName={"userName"}
           className={"mb-3"}
+          onBlur={handleOnBlurChange}
+          valid={errorMsg.userValidation}
+          errorMsg={error.userName}
         />
         <Input
           label={"Email"}
@@ -128,6 +140,7 @@ const SignUp = (props) => {
           type={"password"}
           inputName={"repassword"}
           className={"mb-3"}
+          onBlur={handleOnBlurChange}
           valid={errorMsg.rePassValidation}
           errorMsg={error.repassword}
         />
