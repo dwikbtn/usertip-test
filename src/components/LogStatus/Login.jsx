@@ -1,16 +1,40 @@
 import React, { useState } from "react";
 import logoImg from "../../assets/icons/Logo.png";
+import Input from "../UI/Input";
 
 const Login = (props) => {
-  const [userName, setUserName] = useState();
-  const [password, setPassword] = useState();
+  const [inputValue, setInputValue] = useState({ userName: "", password: "" });
+  const [errorMsg, setErrorMsg] = useState({
+    userValidation: false,
+    passValidation: false,
+  });
+  const { userName, password } = inputValue;
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setInputValue((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const error = {
+    userName: "user name is invalid",
+    password: "password is invalid",
+  };
 
   const loginHandler = (e) => {
     e.preventDefault();
-    if (userName === props.db.userName && password === props.db.password) {
+    const userData = props.db.find((user) => user.userName === userName);
+    if (!userData) {
+      setErrorMsg((prev) => ({ ...prev, userValidation: true }));
+      return 0;
+    }
+    if (userName === userData.userName && password === userData.password) {
+      setErrorMsg();
       props.logStatus();
     } else {
-      console.log("password incorrect");
+      setErrorMsg((prev) => ({ ...prev, passValidation: true }));
     }
   };
 
@@ -20,29 +44,25 @@ const Login = (props) => {
         <img className="w-12 h-12 mb-8" src={logoImg} alt="logo" />
         <h2 className="login-header">Login</h2>
         <div className="w-full bg-neutral-300 h-[2px] rounded-sm mb-8"></div>
-        <label
-          htmlFor="userName"
-          className="h-6 login-text  text-black font-semibold mb-3"
-        >
-          Username
-        </label>
-        <input
-          onChange={(e) => setUserName(e.target.value)}
-          type="text"
-          name="userName"
-          className="bg-neutral-200 h-12 rounded-xl p-3 login-text font-semibold text-gray-200 mb-3"
+        <Input
+          label={"Username"}
+          type={"text"}
+          inputName={"userName"}
+          className={"mb-3"}
+          onChange={handleInputChange}
+          value={userName}
+          valid={errorMsg.userValidation}
+          errorMsg={error.userName}
         />
-        <label
-          htmlFor="password"
-          className="h-6 login-text font-semibold  text-black mb-3"
-        >
-          Password
-        </label>
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          type="password"
-          name="password"
-          className="bg-neutral-200 h-12 rounded-xl p-3 login-text font-semibold text-gray-200 mb-3"
+        <Input
+          label={"password"}
+          type={"password"}
+          inputName={"password"}
+          className={"mb-3"}
+          onChange={handleInputChange}
+          value={password}
+          valid={errorMsg.passValidation}
+          errorMsg={error.password}
         />
         <button
           className="bg-primary rounded-xl h-12 text-neutral-100 p-3 login-text font-bold mb-8  hover:cursor-pointer hover:underline"

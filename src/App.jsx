@@ -21,16 +21,25 @@ function App() {
   };
 
   const signUpHandler = (email, userName, password) => {
+    const newUser = {
+      email,
+      userName,
+      password,
+      coins: 500,
+      attempts: 0,
+      catched: 0,
+      pokeB: 5,
+      greatB: 2,
+      masterB: 1,
+      pokemonList: [],
+    };
+
     setUserInfo((prevState) => {
-      return {
-        ...prevState,
-        emailAddress: email,
-        userName: userName,
-        password: password,
-      };
+      return [...prevState, newUser];
     });
   };
 
+  console.log(userInfo);
   const navbarHandler = (position) => {
     setCurrrentView(position);
   };
