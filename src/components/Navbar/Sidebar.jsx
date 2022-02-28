@@ -11,7 +11,7 @@ import logOutIc from "../../assets/icons/logout.svg";
 
 const SideBar = ({ navbarHandler }) => {
   return (
-    <nav className="w-1/3 bg-neutral-100 flex flex-col h-screen p-6 justify-between">
+    <nav className="w-full row-span-full bg-neutral-100 flex flex-col h-screen p-6 justify-between">
       <img src={logo} alt="logo" className="w-12 h-12 mb-12" />
       <ul className="self-start mb-auto w-full">
         <li

@@ -53,16 +53,14 @@ function App() {
           signUpHandler={signUpHandler}
         />
       ) : (
-        <>
+        <div className="layout-grid ">
+          <SideBar navbarHandler={navbarHandler} />
           <Topbar userInfo={userInfo} />
-          <div className="flex">
-            <SideBar navbarHandler={navbarHandler} />
-            <div className="mt-24 w-full -z-20 h-screen bg-neutral-200">
-              {currentView == "home" && <Home userInfo={userInfo} />}
-              {currentView == "catch" && <Catch userInfo={userInfo} />}
-            </div>
+          <div className="w-full  h-screen  bg-neutral-200">
+            {currentView === "home" && <Home userInfo={userInfo} />}
+            {currentView === "catch" && <Catch userInfo={userInfo} />}
           </div>
-        </>
+        </div>
       )}
     </>
   );

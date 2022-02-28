@@ -8,7 +8,7 @@ import avatar from "../../assets/icons/avatar.png";
 
 const Topbar = ({ userInfo }) => {
   return (
-    <nav className="h-24 top-0 right-0 left-0 -z-10 fixed bg-neutral-100">
+    <nav className="h-24 bg-neutral-100">
       <ul className="py-9 pr-10 flex justify-end items-center">
         <li className="mr-10">
           <img
